@@ -31,6 +31,8 @@ public class BallSorter {
 
         int i = lowerLimit;
         int j = upperLimit;
+
+        Ball temp;
         while (i <= j) {
             while (comparator.compare(balls.get(i), supportElement) < 0) {
                 i++;
@@ -39,7 +41,7 @@ public class BallSorter {
                 j--;
             }
             if (i <= j) {
-                Ball temp = balls.get(i);
+                temp = balls.get(i);
                 balls.set(i, balls.get(j));
                 balls.set(j, temp);
                 i++;
@@ -68,8 +70,9 @@ public class BallSorter {
             heapify(balls, size, i, comparator);
         }
 
+        Ball temp;
         for (int i = size - 1; i >= 0; i--) {
-            Ball temp = balls.get(0);
+            temp = balls.get(0);
             balls.set(0, balls.get(i));
             balls.set(i, temp);
 
@@ -78,16 +81,16 @@ public class BallSorter {
     }
 
     private static void heapify(List<Ball> balls, int size, int root, BallComparator comparator) {
-        int largest = root;
-        int l = 2 * root + 1;
-        int r = 2 * root + 2;
+        int largest = root;         // largest element index
+        int left = 2 * root + 1;    // left tree element index
+        int right = 2 * root + 2;   // right tree element index
 
-        if (l < size && comparator.compare(balls.get(l), balls.get(largest)) > 0) {
-            largest = l;
+        if (left < size && comparator.compare(balls.get(left), balls.get(largest)) > 0) {
+            largest = left;
         }
 
-        if (r < size && comparator.compare(balls.get(r), balls.get(largest)) > 0) {
-            largest = r;
+        if (right < size && comparator.compare(balls.get(right), balls.get(largest)) > 0) {
+            largest = right;
         }
 
         if (largest != root) {
